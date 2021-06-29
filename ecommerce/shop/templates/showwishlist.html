@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Bookies | wishlist {% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'new/css/category.css' %}">
+{% endblock css %}
+
+{% block script %}
+    
+{% endblock script %}
+
+{% block body %}
+
+<!--  start: products-->
+{% if request.session.user %}
+
+{% if wish|length < 1 %} 
+    <div class="container-fluid mb-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div><img src="{% static 'images/empty_wishlist.png' %}" alt="" width="500px"></div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="mt-2">
+                    <h4>Your Wishlist:</h4>
+                </div>
+                <div class="row category_right mt-0 mt-md-2 pt-3 pl-3">
+                    {% for w in wish %}
+                    <div class="col-12 col-sm-4 col-md-3">
+                        <div class="wishlist">
+                            {% if 'user' in request.session %}
+                            <a href="/delwishlist/{{w.pid}}/{{request.session.userid}}"
+                                class="text-decoration-none text-dark"><i class="fas fa-heart" style="color: red;"></i></a>
+                            {% else %}
+                            <a href="/userlogin" class="text-decoration-none text-dark "><i class="far fa-heart"></i></a>
+                            {% endif %}
+                        </div>
+                        <a href="/moredetails/{{w.pid}}" class="text-decoration-none">
+                            <div class="row product text-center mr-2 mb-2">
+                                <div class="col-4 col-sm-12">
+                                    <div class="prod_img mr-auto ml-auto mt-2 mb-2">
+                                        <img src="/media/{{w.productimage}}" alt="img" height="100%" width="100%">
+                                    </div>
+                                </div>
+                                <div class="col-8 col-sm-12 prod_details mt-0 mb-0 p-0">
+                                    <div class=" pt-2 ">
+                                        <h5 class="titletext">{{w.productname}}</h5>
+                                        <div class="authortext">{{w.author}}</div>
+                                        <div class="star-rating">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            </ul>
+                                        </div>
+                                        <h5 class="pricetext">&#8377; {{w.discountprice}}<del
+                                                class="pricedeltext">&#8377; {{w.productprice}}</del></h5>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% else %}
+    <div class="container-fluid mb-3">
+        <div class="row">
+            <div class="col-12 cartop ">
+                <span class="float-left">
+                </span>
+            </div>
+            <div class="col-12 text-center">
+                <div><img src="{% static 'images/carterror.png' %}" alt="" width="200px"></div>
+                <div>to see your wishlist.. please login !</div>
+                <a href="/login" class="text-decoration-none logsign_icon btn btn-primary">Login</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <!--  end: products-->
+    {% endif %}
+    {% endblock body %}

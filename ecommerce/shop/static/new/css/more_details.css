@@ -1,0 +1,47 @@
+@font-face 
+{
+    src:url('../font/Roboto_Slab/RobotoSlab-VasriableFont_wght.ttf');
+    font-family:roboto;
+}
+
+.more_details
+{
+    background-color: #dfdfdf;
+    margin-top: 6px;
+    padding-bottom: 20px;
+    font-family:roboto;
+}
+.product_container
+{
+    background-color: #ececec;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.product_image
+{
+    width: 200px;
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+.specification>button
+{
+    margin: 20px 2%;
+}
+.details_container
+{
+    min-height: 200px;
+    max-height: 300px;
+    overflow-y: auto;
+    border-bottom: 1px solid #b4afaf;
+    background-color: #e8e8e8;
+}
+.prodprice
+{
+    color: green;
+}
+.delprice
+{
+    color: gray;
+    font-size: 20px;
+}

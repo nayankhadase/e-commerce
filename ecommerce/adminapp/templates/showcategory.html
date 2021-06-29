@@ -1,0 +1,84 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Bookies | Category{% endblock title %}
+
+{% block body %}
+<!-- MAIN CONTENT -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title pull-left">Category</h3>
+                        <span class="pull-right"><a href="/adminapp/addcategory" class="btn btn-success btn-round">+ Add Category</a></span>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr  >
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Category</th>
+                                    <th class="text-center">status</th>
+                                    <th class="text-center">Operation</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for names in category %}
+                                <tr>
+                                    <td class="text-center">{{names.id}}</td>
+                                    <td class="text-center">{{names.category}}</td>
+                                    <td class="text-center">
+                                        <a href="/adminapp/statuscategory/{{names.id}}/{{names.cat_status}}">{{names.cat_status}}</a>
+                                    </td>
+                                    <td  class="text-center">
+                                        <a href="/adminapp/editcategory/{{names.id}}" class="btn btn-success btn-sm">Edit</a>
+                                        
+                                        <a href="/adminapp/deletecategory/{{names.id}}" class="btn btn-danger btn-sm" id="deldata" onclick="return Deletedata(this)">Delete</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        {% if category.has_previous %}
+                            <a href="?page=1">First</a>
+                            <a href="?page={{category.previous_page_number}}">Prev</a>
+                        {% endif %}
+
+                        <span>page {{ category.number }} of {{ category.objpage.num_pages }}</span>
+
+                        {% if category.has_next %}
+                            <a href="?page={{category.next_page_number}}">Next</a>
+                            <a href="?page={{category.objpage.num_pages}}">Last</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->
+{% endblock body %}
+
+{% block script %}
+
+<script>
+    function Deletedata(val)
+    {
+        var valu=confirm("Do you want to delete this record ??");
+        if (valu == false)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+</script>
+
+{% endblock script %}

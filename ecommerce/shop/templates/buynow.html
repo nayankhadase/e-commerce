@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'new/css/cart.css' %}"> 
+{% endblock css %}
+{% block script %} 
+    <script src="{% static 'new/js/buynow.js' %}"></script>
+{% endblock script %}
+{% block title %} Buynow {% endblock title %}
+
+{% block body %}
+    <div id="resultmodel"></div>
+
+    {% if 'user' in request.session %}
+    <div class="container-fluid mb-2">
+        <div class="row mt-3 pr-2 pl-2">
+            <div class="col-md-8 cartleft">
+                <div class="row">
+                    <div class="col-12 cartop ">
+                        <span class="float-left"><h4 class="m-0">Buynow:</h4></span>
+                        <span class="float-right">Deliver to: <span class="addr" id="address">{{ user.address|truncatechars:15 }}</span></span>
+                    </div>
+                </div>
+<!--  start:productdetails-->
+            {% for b in buynow %}
+                <div class="row mt-2 proddetails">
+                    <div class="col-md-4 col-5 pt-3 ">
+                        <div class="cart_prodimg m-auto"><img src="/media/{{b.productimage}}" alt="" width="100%" class="img-fluid"></div>
+                        <div>
+                            <table class="table ">
+                                <tr>
+                                    <td>QTY:</td>
+                                    <td ><form action="" method="POST">
+                                        {% csrf_token %}
+                                    <select name="prodqty" id="qtyselect">
+                                        {% for i in range %}
+                                        {% if b.qty == i %}
+                                        <option value="{{b.qty}}" selected >{{b.qty}}</option>
+                                        {% else %}
+                                        <option value="{{i}}">{{i}}</option>
+                                        {% endif %}
+                                        {% endfor %}
+
+                                        {# <!--this is for ajax--> #}
+                                        <input type="text" value="{{b.id}}" id="cid" style="display: none;">
+                                        <input type="text" value="{{b.pid}}" id="pid" style="display: none;">
+                                        <input type="text" value="{{b.uid}}" id="uid" style="display: none;">
+                                        
+                                    </select>
+                                </form></td>
+                                </tr>
+
+                            </table>
+                          </div>
+                    </div>
+                    <div class="col-md-5 col-7 pt-3">
+                        <h5>{{b.productname}}</h5>
+                        <p>{{b.author}}</p>
+                        <p>rating</p>
+                        <div> <strong class="h5"> &#8377;<span id="pdisc">{{b.discountprice}}</span> &nbsp;</strong> <del>&#8377;<span id="pprice">{{b.productprice}}</span></del> <span> &nbsp; {{b.discount}}% off </span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 pt-3">
+                        <div>
+                            <p>Delivery by Sun May 30 </p>
+                            <p>Free <del>&#8377;<span id="deli">40</span></del></p>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            <!--  end:productdetails-->
+             {% endfor %}
+            </div>
+            <!--  start:product price-->
+            <div class="col-md-4">
+               <div class="border ">
+                    <h4 class="cartop"> PRICE DETAILS</h4>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Price:</td>
+                            <td>&#8377;
+                            <span id="dprice"></span></td>
+                        </tr><tr>
+                            <td>Discount:</td>
+                            <td>-&#8377;<span id="doff"></span></td>
+                        </tr><tr>
+                            <td>Delivery Charges:<br>
+                                <span style="font-size: 10px;">Delivery free above &#8377;299</span>
+                            </td>
+                            <td><span id="dcharg"></span></td>
+                        </tr>
+                        <tfoot>
+                        <tr>
+                            <th>Total:</th>
+                            <th>
+                                &#8377;<span id="fprice"></span>
+                                <input type="tel" id="finprice" class="d-none">
+                            </th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <a href="#" class="btn btn_orange btn-block mt-4" id="chkout">Place order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="container-fluid mb-3" >
+        <div class="row" >
+                <div class="col-12 cartop ">
+                    <span class="float-left"><h4>Buynow</h4></span>
+                </div>
+                <div class="col-12 text-center">
+                    <div><img src="{% static 'images/carterror.png' %}" alt="" width="200px"></div>
+                    <div>to Buy product.. please login !</div>
+                    <a href="/login" class="text-decoration-none logsign_icon btn btn-primary">Login</a>
+                </div>
+                </div>
+            </div>
+            </div>
+            </div>
+    {% endif %}
+{% endblock body %}
+  

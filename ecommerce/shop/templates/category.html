@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Bookies | category {% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'new/css/category.css' %}">
+{% endblock css %}
+
+{% block script %}
+<script src="{% static 'new/js/category.js' %}"></script>
+{% endblock script %}
+
+{% block body %}
+<!--    start: top carousel -->
+<div class="cont">
+    <img src="{% static 'images/Webp.net-resizeimage%20(2).png' %}" alt="" width="100%">
+</div>
+<!--    end: top carousel -->
+
+<!--  start: middle container-->
+
+
+<div class="container-fluid">
+    <div class="row category pt-3 pb-3 ">
+        <!--  start: left filter options-->
+        <div class="col-3 d-none d-md-block pr-4">
+            <form action="#" method="POST" class="filter_form">
+                {% csrf_token %}
+                <div class="category_filter mb-2">
+                    <h6 class="dropdown-toggle text-center filter_title" data-toggle="collapse"
+                        data-target="#filter_list5">Filter By Author</h6>
+                    <div class="filter_list collapse show" id="filter_list5">
+                        {% for a in author %}
+                        <p class="mb-1 pl-2"><input type="checkbox" name="filter[]" id="authorfilt" value="{{a}}"> {{a}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="category_filter mb-2">
+                    <h6 class="dropdown-toggle text-center filter_title" data-toggle="collapse"
+                        data-target="#filter_list2">Filter By price</h6>
+                    <div class="filter_list form-group collapse show" id="filter_list2">
+                        <input type="range" id="" style="width: 100%;">
+                    </div>
+                </div>
+                <div class="category_filter mb-2">
+                    <h6 class="dropdown-toggle text-center filter_title" data-toggle="collapse"
+                        data-target="#filter_list3">Filter By Rating</h6>
+
+                    <div class="filter_list collapse show" id="filter_list3">
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 4 ★ &amp; above</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 3 ★ &amp; above </div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 2 ★ &amp; above</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 1 ★ &amp; above</div>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+        <!--  end: left filter options -->
+        <div class="col-md-9">
+            <div class="row  pr-md-2 pr-0">
+                <!--  start: filter and sort button (visibel below md) -->
+                <div class="col-12">
+                    <div class="row  mb-md-0  pt-2 pb-md-0 text-center">
+                        <div class="col-6 d-md-none"><button type="button" class="btn btn_outline_light btn-block"
+                                data-toggle="modal" data-target="#filter_popup"> Filter </button></div>
+
+                        <div class="col-md-6 d-none d-md-block text-center">
+                            <h3 class="mb-0">Books For You</h3>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <select class="form-control" name="filterprod" id="prodfilter">
+                                    <option value="0" class="text-center"> Sort </option>
+                                    <option value="1">New To Old</option>
+                                    <option value="2">Old To New</option>
+                                    <option value="3">Price Low to High</option>
+                                    <option value="4">Price High to Low</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!--  end: filter and sort button-->
+
+                <!--  start: modal filter (visible below md) -->
+                <div class="modal" id="filter_popup">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <form action="#" method="POST" class="filter_form">
+                                    {% csrf_token %}
+                                    <div class="category_filter mb-2">
+                                        <h6 class="dropdown-toggle text-center filter_title" data-toggle="collapse"
+                                            data-target="#filter_list5">Filter By Author</h6>
+                                        <div class="filter_list collapse show" id="filter_list5">
+                                            {% for a in author %}
+                                            <p class="mb-1 pl-2"><input type="checkbox" name="filter[]" id="authorfilt" value="{{a}}"> {{a}}</p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                    
+                                    <div class="category_filter mb-2">
+                                        <h6 class="dropdown-toggle text-center filter_title" data-toggle="collapse"
+                                            data-target="#filter_list2">Filter By price</h6>
+                                        <div class="filter_list form-group collapse show" id="filter_list2">
+                                            <input type="range" id="" style="width: 100%;">
+                                        </div>
+                                    </div>
+                                    <div class="category_filter mb-2">
+                                        <h6 class="dropdown-toggle text-center filter_title" data-toggle="collapse"
+                                            data-target="#filter_list3">Filter By Rating</h6>
+                    
+                                        <div class="filter_list collapse show" id="filter_list3">
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 4 ★ &amp; above</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 3 ★ &amp; above </div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 2 ★ &amp; above</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 1 ★ &amp; above</div>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-warning" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  end: modal filter (visible below md)-->
+
+                <!--  start: products-->
+                <div class="col-12">
+                    <div class="row category_right mt-0 mt-md-2 pt-3 pl-3" id="filterprod">
+
+                        {% if prod|length == 0 %}
+                        <h3>Result not Found</h3>
+                        {% else %}
+
+                        {% for p in prod %}
+                        <div class="col-12 col-sm-4 col-md-3">
+                            <div class="wishlist">
+                                {% if request.session.user %}
+                                {% if p.id in wish %}
+                                <a href="/delwishlist/{{p.id}}/{{request.session.userid}}"
+                                class="text-decoration-none deletewish" id="delwish" style="color: red;"><i
+                                    class="fas fa-heart" ></i></a>
+                                {% endif %}
+                                {% if p.id not in wish %}
+                                <a href="/wishlist/{{p.id}}/{{request.session.userid}}"
+                                    class="text-decoration-none text-dark adwish" id="addwish"><i class="far fa-heart" ></i></a>
+                                    {% endif %}
+                                {% else %}
+                                <a href="/login" class="text-decoration-none text-dark "><i class="far fa-heart"></i></a>
+                                {% endif %}
+                            </div>
+                            <a href="/moredetails/{{p.id}}" class="text-decoration-none">
+                                <div class="row product text-center mr-2 mb-2">
+                                    <div class="col-4 col-sm-12">
+                                        <div class="prod_img mr-auto ml-auto mt-2 mb-2">
+                                            <img src="{{p.productimage.url}}" alt="img" height="100%" width="100%">
+                                        </div>
+                                    </div>
+                                    <div class="col-8 col-sm-12 prod_details mt-0 mb-0 p-0">
+                                        <div class=" pt-2 ">
+                                            <h5 class="titletext">{{p.productname}}</h5>
+                                            <div class="authortext">{{p.author}}</div>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="pricetext">&#8377; {{p.discountprice}}<del class="pricedeltext">&#8377; {{p.productprice}}</del></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {#  this is for filter ajax  #}
+                                <input type="text" value="{{p.categoryindex}}" id="catid" style="display: none;">
+                                <input type="text" value="{{p.subcategoryindex}}" id="subid" style="display: none;">
+                        {#  this is for filter ajax  #}
+                        {% endfor %}
+
+                        {% endif %}
+                    </div>
+                </div>
+                <!--  end: products-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  end: middle container-->
+
+
+
+
+{% endblock body %}
+

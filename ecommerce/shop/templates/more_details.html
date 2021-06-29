@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Moredetails {% endblock title %}
+{% block css %} <link rel="stylesheet" href="{% static 'new/css/more_details.css' %}"> {% endblock css %}
+
+{% block body %}
+<div class="container d-none d-md-block"> 
+    <div class="row">
+        <div class="col-12">
+            <a href="/" class="text-decoration-none">Home</a> &gt; <a href="/category/{{prod.categoryindex}}/{{prod.subcategoryindex}}" class="text-decoration-none">Products</a> &gt; <a href="/moredetails/{{prod.id}}" class="text-decoration-none">More Details</a>
+        </div>
+    </div>
+</div>
+<div class="container more_details">
+    <div class="row">
+        <div class="col-12">
+            <div class="row product_container">
+                <div class="col-md-3 col-lg-4 m-auto">
+                    <div class="product_image m-auto"><img src="{{prod.productimage.url}}" alt="" width="100%"></div>
+                </div>
+                <div class="col-md-5 col-lg-6 pt-2 pl-5 text-center text-md-left m-auto">
+                    <div class="product_details">
+                        <h2 class="h1">{{prod.productname}}</h2>
+                        <p>{{prod.author}}</p>
+                        <h2 class="prodprice">&#8377; {{prod.discountprice}} <del class="delprice">&#8377; {{prod.productprice}}</del> </h2>
+                        <h4>{{prod.discount}}% off</h4>
+                        <p class="rating">★★★★</p>
+                        <div class="offerbutton mt-4">
+                            {% if request.session.user %}
+                            <a href="/buynow/{{prod.id}}/{{request.session.userid}}" class="btn btn_orange" >Buy Now</a>
+                            <a href="/addtocart/{{prod.id}}/{{request.session.userid}}" class="btn btn_yellow" >Add To Cart</a>
+                            {% else %}
+                            <a href="/showcart" class="btn btn_orange" >Buy Now</a>
+                            <a href="/showcart" class="btn btn_yellow" >Add To Cart</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-12 pr-0 pl-0 pr-sm-3 pl-sm-3 ">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs text-center" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#descrip">Description</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#author">Author</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#review">Review</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content details_container pt-2 ">
+            <div id="descrip" class="container tab-pane active">
+                <p class="text-justify">{{prod.proddiscription}}</p>
+            </div>
+            <div id="author" class="container tab-pane fade">
+                <h6>Oliver Napoleon Hill:</h6>
+                <p class="text-justify">Oliver Napoleon Hill (born October 26, 1883 – November 8, 1970) was an American
+                    self-help author. He is known best for his book Think and Grow Rich (1937) which is among the 10
+                    best selling self-help books of all time. Hill's works insisted that fervid expectations are
+                    essential to improving one's life. Most of his books were promoted as expounding principles to
+                    achieve "success".</p>
+            </div>
+            <div id="review" class="container tab-pane fade">
+                <h6>David Feinstein:</h6>
+                <p class="text-justify">
+                    I have read hundreds of books over the past many years in my quest for success. "Think and Grow
+                    Rich" truly stands right near the top. It has made a positive impact on my life in many ways.
+                </p>
+                <h6>Gabriela :</h6>
+                <p class="text-justify">
+                    'Think and Grow Rich' by Napoleon Hill, takes an in depth look at the power of the mind and personal
+                    belief and how these influence our success. Hill uses examples of past success such as Andrew
+                    Carnegie, Henry Ford and Thomas Edison to show how factors such as desire, the subconscious mind,
+                    faith and goals can interweave to create favorable condition for success
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

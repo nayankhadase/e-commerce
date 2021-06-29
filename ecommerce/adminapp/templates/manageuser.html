@@ -1,0 +1,83 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Bookies | ManageUser{% endblock title %}
+
+{% block body %}
+<!-- MAIN CONTENT -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Manage Users</h3>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-body table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr >
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Username</th>
+                                    <th class="text-center">First Name</th>
+                                    <th class="text-center">Last name</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Password</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for names in userdata %}
+                                <tr>
+                                    <td class="text-center">{{names.id}}</td>
+                                    <td class="text-center">{{names.username}}</td>
+                                    <td class="text-center">{{names.firstname}}</td>
+                                    <td class="text-center">{{names.lastname}}</td>
+                                    <td class="text-center">{{names.email}}</td>
+                                    <td class="text-center">{{names.password}}</td>
+                                    <td class="text-center">{{names.address}}</td>
+                                    <td class="text-center">
+                                        <a href="#">{{names.user_status}}</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="/adminapp/deleteuser/{{names.id}}" class="btn btn-danger btn-sm" id="deldata" onclick="return Deletedata(this)">Delete</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- END MAIN CONTENT -->
+{% endblock body %}
+{% block script %}
+
+<script>
+    // $("#deldata").click(
+    //     function()
+    //     {
+    //         return confirm("Do you want to delete this record ??");
+    //     }
+    // )
+    function Deletedata(val)
+    {
+        var valu=confirm("Do you want to delete this record ??");
+        if (valu == false)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+</script>
+
+{% endblock script %}

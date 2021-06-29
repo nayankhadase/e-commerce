@@ -1,0 +1,137 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Bookies | addproduct {% endblock title %}
+
+{% block body %}
+<!-- MAIN CONTENT -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 m-auto">
+                <div class="panel p-2">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Add Product</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/adminapp/uploadproduct" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>Select Category:</label>
+                                <select class="form-control" name="selectcategory" id="cat">
+                                    <option value="0">Select Category</option>
+                                    {% for catname in category %}
+                                    <option value="{{catname.id}}">{{catname.category}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label >Select subcategory:</label>
+                                <select class="form-control" name="selectsubcategory" id="subcat">
+                                    <option value="0">Select subcategory</option>
+                                    
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="file"> Product Name:</label>
+                            <input type="text" class="form-control" placeholder="Enter Product Name" name="productname">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="file"> Author name:</label>
+                            <input type="text" class="form-control" placeholder="Enter author Name" name="author">
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="file">Product Price:</label>
+                            <input type="tel" class="form-control" placeholder="Enter Product Price" name="productprice" id="prodprice">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="file">Discount:</label>
+                            <input type="tel" class="form-control" placeholder="Enter Discount(%)" name="discount" id="discount">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="file">Discount Price:</label>
+                            <input type="tel" class="form-control" placeholder="Enter Discount Price" name="discountprice" id="discountprice" >
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="file">Product Image:</label>
+                                <input type="file" class="form-control" id="file"  name="prodimg">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Product Discription:</label>
+                                <textarea class="form-control" name="proddiscription" id="ta"></textarea>
+                            </div>
+                            <br>
+                            <input type="submit" value="Add" class="btn btn-success btn-sm btn-round">
+                            <input type="reset" value="Cancle" class="btn btn-danger btn-sm btn-round">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->
+
+{% endblock body %}
+
+
+{% block script %}
+<script>
+        
+        $(document).ready(
+            function()
+            {
+                $("#discount").blur(
+                function()
+                {
+                    
+                    var pprice=$("#prodprice").val();
+                    var disc=$("#discount").val();
+                    var pfinal=(pprice -(pprice * disc/100)) ;
+                    $('#discountprice').val(pfinal);
+                    
+                }
+            )
+            
+            $("#prodprice").blur(
+                function()
+                {
+                    
+                    var pprice=$("#prodprice").val();
+                    var disc=$("#discount").val();
+                    var pfinal=(pprice -(pprice * disc/100)) ;
+                    $('#discountprice').val(pfinal);
+                    
+                }
+            )
+
+            $("#cat").change(
+                function()
+                {
+                    $.ajax(
+                        {
+                            url:'fetchsubcat',
+                            data:{category:$("#cat").val()},
+                            success:function(res){$("#subcat").html(res)}
+                        }
+                    )
+                }
+            )
+
+
+
+
+            }
+        )
+          
+</script>
+
+{% endblock script %}

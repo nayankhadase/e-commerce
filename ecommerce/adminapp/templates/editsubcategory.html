@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Bookies | editsubcategory{% endblock title %}
+
+{% block body %}
+<!-- MAIN CONTENT -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 m-auto">
+                <div class="panel p-2">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Edit Sub Category</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/adminapp/updatesubcategory/{{subcategory.id}}" method="POST">
+                            {% csrf_token %}
+                            <select class="form-control" name="selectedcategory">
+                                {% for cat in category %}
+                                    {% if cat.id == subcategory.categoryint %}
+                                        <option value="{{cat.id}}" selected>{{cat.category}}</option>
+                                    {% else %}
+                                        <option value="{{cat.id}}">{{cat.category}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <br>
+                            <input type="text" class="form-control" placeholder="Enter Sub Category" value="{{subcategory.subcategory}}" name="hsubcategory">
+                            <br>
+                            <input type="submit" value="Update" class="btn btn-success">
+                            <input type="reset" value="Cancle" class="btn btn-danger">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->
+
+{% endblock body %}

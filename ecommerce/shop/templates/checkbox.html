@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="{% static 'new/js/jq_all.min.js' %}"></script>
+    <script>
+    $(document).ready(
+    function()
+    {
+       $('input').click(
+            function()
+            {
+                 var selectedCheckbox=new Array();
+                 var selchk=$('input')
+               for(var i=0;i<selchk.length;i++)
+               {
+                   if(selchk[i].checked)
+                   {
+                        selectedCheckbox.push(selchk[i].value)
+                   }
+
+               }
+
+                console.log(selectedCheckbox)
+                $.ajax({
+                url: 'getfilterdata',
+                type:'POST',
+
+                data: {
+                 'chkarray':selectedCheckbox,
+
+                 csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+
+
+                },
+                success: function (data) {
+
+                  $("#div1").html(data);
+                  alert(data)
+                }
+              });
+
+                    }
+               )
+
+            }
+
+    )
+
+
+    </script>
+</head>
+<body>
+    {% for c in cat %}
+        <form action="" method="POST" id="form1">
+            {% csrf_token %}
+            <input type="checkbox" name="chkbox" id="chk1" value="{{c.id}}">{{c.category}}
+        </form>
+
+    {% endfor %}
+    <div id="div1"></div>
+</body>
+</html>

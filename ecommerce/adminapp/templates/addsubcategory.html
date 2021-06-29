@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Bookies | addsubcategory{% endblock title %}
+
+{% block body %}
+<!-- MAIN CONTENT -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 m-auto">
+                <div class="panel p-2">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Sub Category</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/adminapp/uploadsubcategory" method="POST" class="vertical-form">
+                            {% csrf_token %}
+                            <div class="form-group">
+                            <select class="form-control" name="selectedcategory">
+                                {% for catname in categoryname %}
+                                <option value="{{catname.id}}">{{catname.category}}</option>
+                                {% endfor %}
+                            </select>
+                            </div>
+                            <br>
+                            <input type="text" class="form-control" placeholder="Enter Sub Category" name="hsubcategory">
+                            <br>
+                            <input type="submit" value="Add" class="btn btn-success btn-sm btn-round">
+                            <input type="reset" value="Cancle" class="btn btn-danger btn-sm btn-round">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->
+
+{% endblock body %}

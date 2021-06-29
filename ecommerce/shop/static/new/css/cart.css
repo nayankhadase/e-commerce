@@ -1,0 +1,28 @@
+.cartop
+{
+    background-color: #abd7e3;
+    padding: 15px 10px;
+}
+
+
+.proddetails
+{
+    border: 1px solid #dfd5d5;
+    margin-bottom: 10px;
+}
+.cart_prodimg
+{
+    max-width: 70px;
+    border: 1px solid red;
+    overflow: hidden;
+}
+.addr
+{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pdisc
+{
+    color: green;
+}

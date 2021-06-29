@@ -1,0 +1,43 @@
+.about
+{
+    background-color: #f6f6f6;
+}
+.about_outer
+{
+   margin: 0;
+    padding: 0;
+}
+.about_outer_text
+{
+    position: absolute;
+    
+}
+.about_outer_text>h2
+{
+    font-size: 50px;
+    font-weight: bolder;
+    font-family: sans-serif;
+    color: #4700ac;
+}
+.vission
+{    
+    padding: 10px;
+    background-color: #dbd0e8;
+    border-radius: 15px;
+    background-image: url(/static/images/paper-pin.png);
+    background-size: 65px;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+.founder 
+{
+    padding: 12px 40px;
+    margin: 0px 14%;
+    box-shadow: 0px 1px 7px 2px #d1d1d1;
+    border-radius: 15px;
+}
+.founder_outer
+{
+    box-shadow: 0px 1px 7px 2px #d1d1d1;
+    background-color: white;
+}

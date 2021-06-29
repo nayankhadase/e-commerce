@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="border ">
+        <h4 class="cartop"> PRICE DETAILS</h4>
+        <table class="table table-striped">
+            <tr>
+                <td>Price({{count}}):</td>
+                <td>&#8377;
+                <span id="dprice"></span></td>
+            </tr><tr>
+                <td>Discount:</td>
+                <td>-&#8377;<span id="doff"></span></td>
+            </tr><tr>
+                <td>Delivery Charges:</td>
+                <td><span id="dcharg"></span></td>
+            </tr>
+            <tfoot>
+            <tr>
+                <th>Total:</th>
+                <th>&#8377;<span id="fprice"></span></th>
+            </tr>
+            </tfoot>
+        </table>
+        <button class="btn btn-primary btn-block mt-4">Place Order</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bookie | Signup</title>
+    <link rel="stylesheet" href="{% static 'new/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'new/css/userlogin.css' %}">
+    <script src="{% static 'new/js/all.min.js' %}"></script>
+    <script src="{% static 'new/js/jq_all.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</head>
+
+<body>
+    
+    <div class="container-fluid body">
+        <div class="row">
+            <div class="col-12">
+                <div class="outer">
+                    <a href="/" class="text-decoration-none float-right closebtn"><i class="fas fa-times"></i></a>
+                    <!-- <h1 class="text-center">Welcome to </h1> -->
+                    <div class="logoimg">
+                        <img src="{% static 'images/logo3.png' %}" alt="" width="200px" class="img-fluid">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="logform">
+                                <div class="logtext">
+                                    <h3 class="text-white">Signup</h3>
+                                </div>
+                                <form class="mt-2" action="/signup" method="POST" id="signform">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name='username' id="username" placeholder="Username" required>
+                                        {% for m in messages %}
+                                        <span class="errormsg" id="errormsg">{{m}}</span>
+                                        {% endfor %}
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="First name" name='firstname' required>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Last name" name='lastname' required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="email" placeholder="Email" name='email' required>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <input type="password" class="form-control" placeholder="Password" name='password' required id="password">
+                                        </div>
+                                        <div class="col">
+                                            <input type="password" class="form-control" placeholder="Confirm Password" id="cpassword"  required>
+                                        </div>
+                                    </div>
+                                    <span id="errorpass" class=""></span>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="term">
+                                        <label class="form-check-label" for="term">Agree Terms and conditions?</label>
+                                    </div>
+                                    <button class="btn btn-primary btn-block" type="submit">Signup</button>
+                                </form>
+                                <div class="text-center">
+                                    <span>Already have account ?? <a href="/login" class="text-decoration-none linksign"> Login </a> here</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" d-none d-md-block col-md-5 m-auto">
+                            <div class="logimg ">
+                                <img src="{% static 'images/login@4x.png' %}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#username").focus(
+            function()
+            {
+                $("#errormsg").css("display","none");
+            }
+        )
+        $("#signform").submit(
+            function()
+            {
+                if ( $("#password").val() === $("#cpassword").val() )
+                {
+                    return true;
+                }
+                else
+                {
+                    $("#errorpass").text("password and confirm password doesn't match");
+                    $("#errorpass").css("color","red");
+                    return false;
+                }
+            }
+        )
+        
+    </script>
+
+</body>
+
+</html>

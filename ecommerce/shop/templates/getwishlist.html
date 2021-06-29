@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if request.session.user %}
+        {% if p.id in wish %}
+        <a href="/delwishlist/{{p.id}}/{{request.session.userid}}"
+        class="text-decoration-none " id="delwish" style="color: red;"><i
+            class="fas fa-heart" ></i></a>
+        {% endif %}
+        {% if p.id not in wish %}
+        <a href="/wishlist/{{p.id}}/{{request.session.userid}}"
+            class="text-decoration-none text-dark " id="addwish"><i class="far fa-heart" ></i></a>
+            {% endif %}
+    {% else %}
+        <a href="/login" class="text-decoration-none text-dark "><i class="far fa-heart"></i></a>
+    {% endif %}
+</body>
+</html>

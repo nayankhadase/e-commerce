@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} category {% endblock title %}
+
+{% block body %}
+    <!--    start:contact-->
+    <div class="container-fluid contact pb-2">
+        <div class="row">
+            <div class="col-12 contact_outer">
+                <img src="images/con1.png" alt="" width="100%" class="img-fluid">
+            </div>
+            <!--    start:map-->
+            <div class="col-12 ">
+                <div class="info_map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1890.6877625531988!2d73.77578708849245!3d18.60217181288138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b9121d48cbdb%3A0xd4abcdf4bc7fddba!2sPride%20Purple%20Square!5e0!3m2!1sen!2sin!4v1617442800323!5m2!1sen!2sin" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            <!--    end:map-->
+            <div class="col-md-6 ">
+                <table class="table ">
+                    <tr>
+                        <td><i class="fas fa-home "></i></td>
+                        <td>
+                            <h4> Pride Purple square </h4>
+                            <p>#216,2nd floor,kaspate wasti,</p>
+                            <p>Vishnu Dev Nagar, Wakad,</p>
+                            <p>Pimpri-Chinchwad,Pune-411057</p><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-phone-alt"></i></td>
+                        <td>
+                            <h4> 07153-24452 / 9158695679</h4>
+                            <p>Help 24x7</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6 ">
+                <form class="mr-5 ml-5 mr-md-0 ml-md-0">
+                    <div class="form-group">
+                        <input type="text" placeholder="Name *" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Email *" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="contact no. *" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="3" class="form-control"></textarea>
+                    </div>
+                    <input type="submit" value="Send" class="btn btn_indigo btn-block">
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--    start:contact-->
+    {% endblock body %}

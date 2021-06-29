@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% load static %}
+    <div class="modal d-block" id="mypopup" style="width: 100%;  background-color: #7b7b7bd6; ">
+        <img src="{% static 'images/gif.gif' %}" alt="" style="position: absolute; width: 100%;">
+        <div class="modal-dialog  modal-dialog-centered" >
+            <div class="modal-content " style= "background-color: #56c56e;">
+                <div class="modal-header m-auto">
+                    <h5 class="text-center text-white">Congratulations... <br><br>   Order Place Successfully</h5>
+                </div>
+                <div class="modal-footer text-center m-auto">
+                    <a href="/orders/{{uid}}" class="btn btn_orange" data-dismiss="modal" >View Your Orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+    

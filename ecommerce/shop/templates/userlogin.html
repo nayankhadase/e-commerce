@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bookie | Login</title>
+    <link rel="stylesheet" href="{% static 'new/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'new/css/userlogin.css' %}">
+    <script src="{% static 'new/js/all.min.js' %}"></script>
+    <script src="{% static 'new/js/jq_all.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid body">
+        <div class="row">
+            <div class="col-12">
+                <div class="outer">
+                    <a href="/" class="text-decoration-none float-right closebtn"><i class="fas fa-times"></i></a>
+                    <!-- <h1 class="text-center">Welcome to </h1> -->
+                    <div class="logoimg">
+                        <img src="{% static 'images/logo3.png' %}" alt="" width="200px" class="img-fluid">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="logform">
+                                <div class="logtext">
+                                    <h3 class="text-white">Login</h3>
+                                </div>
+                                <form action="/login" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group pr-2 pl-2">
+                                        <label for="uname">User name</label>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                                        {% for m in messages %}
+                                        <span class="errormsg" id="errormsg">{{m}}</span>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="form-group pr-2 pl-2">
+                                        <label for="pass">Password</label>
+                                        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                                    </div>
+                                    <div class="form-check pr-4 pl-4">
+                                        <input type="checkbox" class="form-check-input" id="rem">
+                                        <label class="form-check-label" for="rem">Remember me ?</label>
+                                    </div>
+                                    <button class="btn btn-primary btn-block" type="submit">Log in</button>
+                                </form>
+                                <div class="text-center">
+                                    <span>New to Bookies ?? <a href="/signup" class="text-decoration-none linksign"> Signup </a> here</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" d-none d-md-block col-md-5">
+                            <div class="logimg">
+                                <img src="{% static 'images/login.svg' %}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

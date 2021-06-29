@@ -1,0 +1,148 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Bookies | editproduct {% endblock title %}
+
+{% block body %}
+<!-- MAIN CONTENT -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 m-auto">
+                <div class="panel p-2">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Edit Product</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/adminapp/updateproduct/{{product.id}}" method="POST" enctype="multipart/form-data" id="formfile">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>Select Category:</label>
+                                <select class="form-control" name="selectcategory" id="cat">
+                                    {% for catname in category %}
+                                    {% if catname.id == product.categoryindex %}
+                                        <option value="{{catname.id}}" selected id="sele">{{catname.category}}</option>
+                                    {% else %}
+                                        <option value="{{catname.id}}">{{catname.category}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label >Select subcategory:</label>
+                                <select class="form-control" name="selectsubcategory" id="subcat">
+                                    
+                                    {% for subcat in subcategory %}
+                                    {% if product.categoryindex == subcat.categoryint  %}
+                                    {% if subcat.id == product.subcategoryindex %}
+                                    <option value="{{subcat.id}}" selected>{{subcat.subcategory}}</option>
+                                    {% else %}
+                                    <option value="{{subcat.id}}" >{{subcat.subcategory}}</option>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="file"> Product Name:</label>
+                            <input type="text" class="form-control" placeholder="Enter Product Name" name="productname" value="{{product.productname}}">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="file"> Author Name:</label>
+                            <input type="text" class="form-control" placeholder="Enter author Name" name="author" value="{{product.author}}">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="file">Product Price:</label>
+                            <input type="tel" class="form-control" placeholder="Enter Product Price" name="productprice" id="prodprice" value="{{product.productprice}}">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="file">Discount:</label>
+                            <input type="tel" class="form-control" placeholder="Enter Discount(%)" name="discount" id="discount" value="{{product.discount}}">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label >Discount Price:</label>
+                            <input type="tel" class="form-control" placeholder="Enter Discount Price" name="discountprice" id="discountprice" value="{{product.discountprice}}">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label >Product Image:</label>
+                                <!--start: to solve problem of choose file, we use this and apply jq -->
+                                <input type="text" name="filevalid" style="display: none;" value="NULL" id="filevalid">
+                                <!-- end -->
+                                <input type="file" class="form-control"  name="prodimg" id="fil">
+                                <img src="{{ product.productimage.url }}" alt="img" width="80px" id="pimg">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Product Discription:</label>
+                                <textarea class="form-control" name="proddiscription" id="ta">{{product.proddiscription}}</textarea>
+                            </div>
+                            <br>
+                            <input type="submit" value="Update" class="btn btn-success btn-sm btn-round">
+                            <input type="reset" value="Cancle" class="btn btn-danger btn-sm btn-round">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->
+
+{% endblock body %}
+
+{% block script %}
+
+<script>
+$(document).ready(
+    function()
+    {
+        $("#discount").blur(
+            function()
+            {
+                var pprice=$("#prodprice").val();
+                var disc=$("#discount").val();
+                var pfinal=(pprice -(pprice * disc/100)) ;
+                $('#discountprice').val(pfinal); 
+            }
+        )
+        $("#prodprice").blur(
+                function()
+                {
+                    var pprice=$("#prodprice").val();
+                    var disc=$("#discount").val();
+                    var pfinal=(pprice -(pprice * disc/100)) ;
+                    $('#discountprice').val(pfinal);
+                    
+                }
+            )
+        $("#fil").change(
+            function()
+            {
+                $('#filevalid').val('notnull'); 
+                $('#pimg').css('display','none');
+            }
+        ) 
+        
+        // $("#cat").change(
+        //         function()
+        //         {
+        //             $.ajax(
+        //                 {
+        //                     url:'fetcheditsubcat',
+        //                     data:{category:$("#cat").val()},
+        //                     success:function(res){$("#subcat").html(res)}
+        //                 }
+        //             )
+        //         }
+        //     )
+    }
+)
+</script>
+
+{% endblock script %}

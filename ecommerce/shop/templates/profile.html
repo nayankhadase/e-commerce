@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <style>
+        .phead{
+            padding: 10px;
+            background-color: rgb(192 225 230);
+            border-radius: 5px 5px 0 0;
+        }
+    </style>
+{% endblock css %}
+{% block script %}
+{% endblock script %}
+{% block title %} Profile{% endblock title %}
+
+{% block body %}
+<div class="container mb-3 mt-2">
+    <div class="row">
+        <div class="col-8 m-auto">
+            <h4 class="text-center phead">Profile</h4>
+            <form action="profile" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username" class="form-label">User Name</label>
+                    <input type="text" class="form-control" name="username" aria-describedby="emailHelp"
+                        value="{{user.username}}" disabled readonly>
+                </div>
+                <div class="form-group">
+                    <label for="firstname" class="form-label">First name</label>
+                    <input type="text" class="form-control" name="firstname" aria-describedby="emailHelp"
+                        value="{{user.firstname}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="form-label">Last name</label>
+                    <input type="text" class="form-control" name="lastname" aria-describedby="emailHelp"
+                        value="{{user.lastname}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" aria-describedby="emailHelp"
+                        value="{{user.email}}" disabled readonly>
+                </div>
+                <div class="form-group">
+                    <label for="mobile_number" class="form-label">Phone number</label>
+                    <input type="tel" class="form-control" name="mobile_number" aria-describedby="emailHelp"
+                        value="{{user.mobile_number}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea class="form-control" name="address" rows="3"
+                        required>{{user.address}}</textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success ">Update Profile</button>
+                <a href="/profile" class="btn btn-outline-danger ">Discard</a>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} search result {% endblock title %}
+
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'new/css/category.css' %}">
+    {% endblock css %}
+
+{% block script %}
+<script src="{% static 'new/js/category.js' %}"></script>
+{% endblock script %}
+
+{% block body %}
+<!--    start: top carousel -->
+<!-- <div class="cont">
+    <img src="{% static 'images/Webp.net-resizeimage%20(2).png' %}" alt="" width="100%" >
+</div> -->
+<!--    end: top carousel -->
+
+<!--  start: middle container-->
+<h2>Search results:</h2>
+    {% if prod|length < 1 %}
+       <p>Result not found for <b> {{result}} </b></p>
+       <p>Try new Keyword</p>
+    {% else %}
+<div class="container-fluid">
+    <div class="row category pt-3 pb-3 ">
+        <!--  start: left filter options-->
+        <!-- <div class="col-3 d-none d-md-block pr-4">
+            <form action="#" method="POST" class="filter_form">
+                <div class="category_filter mb-2">
+                    <h6 class="dropdown-toggle text-center filter_title " data-toggle="collapse" data-target="#filter_list1">Filter By Genres</h6>
+                    <div class="collapse filter_list show" id="filter_list1">
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> History</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Horror</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Love Story</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Science Fiction</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Biography</div>
+                    </div>
+                </div>
+                <div class="category_filter mb-2">
+                    <h6 class="dropdown-toggle text-center filter_title" data-toggle="collapse" data-target="#filter_list5">Filter By Author</h6>
+                    <div class="filter_list collapse" id="filter_list5">
+                        <p class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> History</p>
+                        <p class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Horror</p>
+                        <p class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Love Story</p>
+                        <p class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Science Fiction</p>
+                        <p class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Biography</p>
+                    </div>
+                </div>
+
+                <div class="category_filter mb-2">
+                    <h6 class="dropdown-toggle text-center filter_title" data-toggle="collapse" data-target="#filter_list2">Filter By price</h6>
+                    <div class="filter_list form-group collapse show" id="filter_list2">
+                        <input type="range" class="form-control-range">
+                    </div>
+                </div>
+                <div class="category_filter mb-2">
+                    <h6 class="dropdown-toggle text-center filter_title" data-toggle="collapse" data-target="#filter_list3">Filter By Rating</h6>
+
+                    <div class="filter_list collapse show" id="filter_list3">
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 4 ★ &amp; above</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 3 ★ &amp; above </div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 2 ★ &amp; above</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 1 ★ &amp; above</div>
+                    </div>
+                </div>
+                <div class="category_filter mb-2">
+                    <h5 class="dropdown-toggle text-center filter_title" data-toggle="collapse" data-target="#filter_list4">Filter By Publisher</h5>
+                    <div class="filter_list collapse" id="filter_list4">
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> History</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Horror</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Love Story</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Science Fiction</div>
+                        <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Biography</div>
+                    </div>
+                </div>
+
+            </form>
+        </div> -->
+        <!--  end: left filter options -->
+        <div class="col-md-10  m-auto">
+            <div class="row  pr-md-2 pr-0">
+                <!--  start: filter and sort button (visibel below md) -->
+                <!-- <div class="col-12">
+                    <div class="row  mb-md-0  pt-2 pb-md-0 text-center">
+                        <div class="col-6 d-md-none"><button type="button" class="btn btn_outline_light btn-block" data-toggle="modal" data-target="#filter_popup"> Filter </button></div>
+
+                        <div class="col-md-6 d-none d-md-block text-center">
+                            <h3 class="mb-0">Books For You</h3>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option value="" class="text-center"> Sort </option>
+                                    <option value="">New To Old</option>
+                                    <option value="">Old To New</option>
+                                    <option value="">Price Low to High</option>
+                                    <option value="">Price High to Low</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!--  end: filter and sort button-->
+
+                <!--  start: modal filter (visible below md) -->
+                <!-- <div class="modal" id="filter_popup">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <form action="" method="POST">
+                                    <div class="category_filter mb-2">
+                                        <h5 class="dropdown-toggle text-center filter_title " data-toggle="collapse" data-target="#filter_list1">Filter By Genres</h5>
+                                        <div class="collapse filter_list show" id="filter_list1">
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> History</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Horror</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Love Story</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Science Fiction</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Biography</div>
+                                        </div>
+                                    </div>
+                                    <div class="category_filter mb-2">
+                                        <h5 class="dropdown-toggle text-center filter_title" data-toggle="collapse" data-target="#filter_list2">Filter By price</h5>
+                                        <div class="filter_list form-group collapse show" id="filter_list2"><input type="range" class="form-control-range">
+                                        </div>
+                                    </div>
+                                    <div class="category_filter mb-2">
+                                        <h5 class="dropdown-toggle text-center filter_title" data-toggle="collapse" data-target="#filter_list3">Filter By Rating</h5>
+                                        <div class="filter_list collapse show" id="filter_list3">
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 4 ★ &amp; above</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 3 ★ &amp; above </div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 2 ★ &amp; above</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> 1 ★ &amp; above</div>
+                                        </div>
+                                    </div>
+                                    <div class="category_filter mb-2">
+                                        <h5 class="dropdown-toggle text-center filter_title" data-toggle="collapse" data-target="#filter_list4">Filter By Publisher</h5>
+                                        <div class="filter_list collapse" id="filter_list4">
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> History</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Horror</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Love Story</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Science Fiction</div>
+                                            <div class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Biography</div>
+                                        </div>
+                                    </div>
+                                    <div class="category_filter mb-2">
+                                        <h5 class="dropdown-toggle text-center filter_title" data-toggle="collapse" data-target="#filter_list5">Filter By Author</h5>
+                                        <div class="filter_list collapse" id="filter_list5">
+                                            <p class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> History</p>
+                                            <p class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Horror</p>
+                                            <p class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Love Story</p>
+                                            <p class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Science Fiction</p>
+                                            <p class="mb-1 pl-2"><input type="checkbox" name="filter1[]"> Biography</p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-warning" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!--  end: modal filter (visible below md)-->
+
+                <!--  start: products-->
+                <div class="col-12">
+                    <div class="row category_right mt-0 mt-md-2 pt-3 pl-3">
+                       {% for p in prod %}
+                        <div class="col-12 col-sm-4 col-md-3">
+                            <a href="/moredetails/{{p.id}}" class="text-decoration-none">
+                                <div class="row product text-center mr-sm-2 mb-2">
+                                    <div class="col-4 col-sm-12">
+                                        <div class="prod_img mr-auto ml-auto mt-2 mb-2">
+                                            <img src="{{p.productimage.url}}" alt="img" height="100%" width="100%">
+                                        </div>
+                                    </div>
+                                    <div class="col-8 col-sm-12 m-auto p-0">
+                                        <div class="prod_details pt-2 ">
+                                            <h5 class="titletext" >{{p.productname}}</h5>
+                                            <div class="authortext">{{p.author}}</div>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="pricetext">&#8377; {{p.discountprice}}<del class="pricedeltext">&#8377; {{p.productprice}}</del></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                       
+                    </div>
+                </div>
+                <!--  end: products-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  end: middle container-->
+{% endif %}
+<script>
+
+    $("#filt").change(
+        function () {
+            var val = '';
+            if (this.checked) {
+                val = val + $(this).val();
+
+            }
+            alert(val);
+        }
+    )
+
+</script>
+
+
+{% endblock body %}

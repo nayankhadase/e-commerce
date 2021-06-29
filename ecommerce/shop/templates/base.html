@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} {% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'new/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'new/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'new/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'new/css/lightslider.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
+
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+    {% block css %} {% endblock css %}
+    <script>
+        $(document).ready(
+            function(){
+                $(document).load(function(){alert("loaded")}); //not working
+            }
+        )
+    </script>
+    <script src="{% static 'new/js/all.min.js' %}"></script>
+    <script src="{% static 'new/js/jq_all.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    
+    <script src="{% static 'new/js/home.js' %}"></script>
+    <script src="{% static 'new/js/slider.js' %}"></script>
+    <script src="{% static 'new/js/lightslider.js' %}"></script>
+    {% block script %} {% endblock script %}
+    
+</head>
+
+<body>
+    <!-- start:navbar-->
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top navbar_container" id="navbar">
+
+        <a href="/" class="navbar-brand "><img src="{% static 'images/logo4.png' %}" alt="logo" width="150px"></a>
+
+        <div class="searchbar">
+            <form class="form-inline search_menu " method="GET" action="/search">
+                <div class="innersearch">
+                    <input class="search_input" type="search" placeholder="Search" name='search'>
+                    <button class="searchbtn" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+
+        {% if 'user' in request.session %}
+        <div class="userdrop">
+            <button type="button" class="btn btn-uname dropdown-toggle">
+                {{vname}}
+            </button>
+            <div class="userlog">
+                <div class="dropinner">
+                    <a class="text-decoration-none" href="/profile">Profile</a>
+                    <a class="text-decoration-none" href="/orders/{{request.session.userid}}">My Orders</a>
+                    <a class="text-decoration-none" href="/showwishlist">Wishlist</a>
+                    <a class="text-decoration-none" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+        <div class="userdrop">
+            <a href="/login" class="btn btn-light text-dark pt-1 pb-1 text-decoration-none text-white">Log in</a>
+            <div class="userlog ">
+                <div class="dropinner">
+                    <a class="text-decoration-none" href="/signup">Create account</a>
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+        <div class="ml-2">
+            {% if 'user' in request.session %}
+            <a href="/showcart" class="text-decoration-none cart"><i class="fas fa-cart-plus"></i>
+                <span class="cartnum">{{count}}</span>
+            </div>
+            {% else %}
+                <a href="/showcart" class="text-decoration-none cart"><i class="fas fa-cart-plus"></i>
+            {% endif %}
+        
+    </nav>
+
+
+    <!-- end: navbar-->
+
+    <!-- start: menubar-->
+
+    <ul id="autoWidth" class="cs-hidden" >
+        <li class="item">
+            <div class="mainmenu">
+                <div class="content"><a href="/" class="menu text-decoration-none "><i class="fas fa-home"></i> Home</a></div>
+            </div>
+        </li>
+        {% for c in cat %}
+        <li class="item">
+            <div class="mainmenu">
+                <div class="content"><a href="#" class="menu text-decoration-none dropdown-toggle">{{c.category}}</a>
+                </div>
+
+                <div class="dropmenu">
+                    <div class="dropdata">
+
+                        {% for s in sub %}
+                        {% if c.id == s.categoryint %}
+                        <a href="/category/{{s.categoryint}}/{{s.id}}" >{{s.subcategory}}</a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <!-- end: menubar -->
+
+    <!-- start: Messages -->
+    {% for m in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{m}}.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    <!-- end: Messages -->
+
+    {% block body %} {% endblock body %}
+
+    <footer class="container-fluid ">
+        <div class="row ">
+            <div class="col-12 pt-2 pb-2 ">
+                <div><img src="{% static 'images/logo4.png' %}" alt="logo" width="150px"></div>
+            </div>
+            <div class="col-sm-4 col-6">
+                <ul>
+                    <li><a href="#" class="text-decoration-none text_gray">About Us</a></li>
+                    <li><a href="#" class="text-decoration-none text_gray">Contact Us</a></li>
+                    <li><a href="#" class="text-decoration-none text_gray">Direction</a></li>
+                    <li><a href="#" class="text-decoration-none text_gray">Blog</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-4 col-6">
+                <ul>
+                    <li><a href="#" class="text-decoration-none text_gray">Promotions</a></li>
+                    <li><a href="#" class="text-decoration-none text_gray">Partners</a></li>
+                    <li><a href="#" class="text-decoration-none text_gray">Careers</a></li>
+                    <li><a href="#" class="text-decoration-none text_gray">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-4 col-8 m-auto social text-center"><span>Social Media:</span><br>
+                <a href="#" class="text-decoration-none text_gray"><i class="fab fa-instagram text_gray"></i></a>
+                <a href="#" class="text-decoration-none text_gray"><i class="fab fa-facebook text_gray"></i></a>
+                <a href="#" class="text-decoration-none text_gray"><i class="fab fa-twitter text_gray"></i></a>
+                <a href="#" class="text-decoration-none text_gray"><i class="fab fa-linkedin text_gray"></i></a>
+            </div>
+            
+        </div>
+    </footer>
+
+    <script>
+        // $("#signformdata").submit(
+        //     function(e)
+        //     {
+        //         e.preventDefault()
+        //         $.ajax(
+
+        //             {
+
+        //                 type:"POST",
+        //                 url:'signup',
+        //                 data:{
+        //                     username:$("#username").val(),
+        //                     firstname:$("#firstname").val(),
+        //                     lastname:$("#lastname").val(),
+        //                     password:$("#password").val(),
+        //                     email:$("#email").val(),
+        //                     // csrfmiddlewaretoken:$('input[name=csrfmiddleware]').val()
+        //                 },
+        //                 success:function(res){alert(res)}
+        //             }
+        //         )
+        //     }
+        // )
+
+    </script>
+</body>
+
+</html>

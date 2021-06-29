@@ -1,0 +1,93 @@
+*
+{
+    box-sizing: border-box;
+}
+@font-face 
+{
+    src:url('../font/Roboto_Slab/RobotoSlab-VasriableFont_wght.ttf');
+    font-family:roboto;
+}
+.body
+{
+    font-family:roboto;
+    background-image: url(/static/images/ex4.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    
+}
+
+.outer
+{
+    border: 2px solid gray;
+    margin: 5vh 5%;
+    border-radius: 20px;
+    background-color: #ffffff45;
+    box-shadow: 0 0px 8px 1px #121212;
+    
+}
+.closebtn
+{
+    color: #fdfdfd;
+    font-weight: lighter;
+    font-size: 27px;
+    padding: 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+}
+.closebtn:hover
+{
+    transform: scale(1.05);
+    color: #b1acac;
+    cursor: pointer;
+}
+.logoimg
+{
+    width: 15vw;
+    margin: auto;
+}
+.logtext
+{
+    text-align: center;
+    background-color: dodgerblue;
+    border-radius: 7px 7px 0 0;
+/*    background-color: #ff971e;*/
+    padding: 6px 3px;
+    margin-bottom: 12px;
+}
+.logform
+{
+/*    border: 1px solid green;*/
+    
+    padding: 10px 15px;
+/*    color: white;*/
+}
+.logimg
+{
+    margin: 10px 0;
+    width: 100%;
+
+    /* background-image: url(/static/images/login.svg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; */
+
+    margin: auto;
+}
+
+input
+{
+    background-color: #d8dbdbc7 !important;
+}
+input:focus
+{
+    background-color: white !important;
+}
+.errormsg
+{
+    color: red;
+    
+}
